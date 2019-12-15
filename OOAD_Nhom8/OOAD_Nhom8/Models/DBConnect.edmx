@@ -1,0 +1,457 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="OOADModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HoTen" Type="nvarchar" MaxLength="50" />
+          <Property Name="SoDienThoai" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="KhachHang">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HoTen" Type="nvarchar" MaxLength="50" />
+          <Property Name="DiaChi" Type="nvarchar" MaxLength="200" />
+          <Property Name="SoDienThoai" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="NganHang">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenNganHang" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PhieuThueXe">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ThoiGianMuon" Type="datetime" />
+          <Property Name="ThoiGianTra" Type="datetime" />
+          <Property Name="MaTheThueXe" Type="int" />
+          <Property Name="MaXe" Type="int" />
+        </EntityType>
+        <EntityType Name="TheNganHang">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MaKhachHang" Type="int" />
+          <Property Name="MaNganHang" Type="int" />
+        </EntityType>
+        <EntityType Name="TheThueXe">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NgayLamThe" Type="datetime" />
+          <Property Name="LoaiThe" Type="int" />
+          <Property Name="MaKhachHang" Type="int" />
+          <Property Name="MaQuanLy" Type="int" />
+        </EntityType>
+        <EntityType Name="XeDap">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenXE" Type="nvarchar" MaxLength="50" />
+          <Property Name="TinhTrangXe" Type="int" />
+          <Property Name="GiaThue" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Hinh" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <Association Name="fk_PhieuThueXe_TheThueXe">
+          <End Role="TheThueXe" Type="Self.TheThueXe" Multiplicity="0..1" />
+          <End Role="PhieuThueXe" Type="Self.PhieuThueXe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TheThueXe">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PhieuThueXe">
+              <PropertyRef Name="MaTheThueXe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_PhieuThueXe_XeDap">
+          <End Role="XeDap" Type="Self.XeDap" Multiplicity="0..1" />
+          <End Role="PhieuThueXe" Type="Self.PhieuThueXe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="XeDap">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PhieuThueXe">
+              <PropertyRef Name="MaXe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_TheNganHang_KhachHang">
+          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="0..1" />
+          <End Role="TheNganHang" Type="Self.TheNganHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhachHang">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TheNganHang">
+              <PropertyRef Name="MaKhachHang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_TheNganHang_NganHang">
+          <End Role="NganHang" Type="Self.NganHang" Multiplicity="0..1" />
+          <End Role="TheNganHang" Type="Self.TheNganHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NganHang">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TheNganHang">
+              <PropertyRef Name="MaNganHang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_TheThueXe_Admin">
+          <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
+          <End Role="TheThueXe" Type="Self.TheThueXe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admin">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TheThueXe">
+              <PropertyRef Name="MaQuanLy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_TheThueXe_KhachHang">
+          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="0..1" />
+          <End Role="TheThueXe" Type="Self.TheThueXe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhachHang">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TheThueXe">
+              <PropertyRef Name="MaKhachHang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OOADModelStoreContainer">
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KhachHang" EntityType="Self.KhachHang" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NganHang" EntityType="Self.NganHang" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PhieuThueXe" EntityType="Self.PhieuThueXe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TheNganHang" EntityType="Self.TheNganHang" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TheThueXe" EntityType="Self.TheThueXe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="XeDap" EntityType="Self.XeDap" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_PhieuThueXe_TheThueXe" Association="Self.fk_PhieuThueXe_TheThueXe">
+            <End Role="TheThueXe" EntitySet="TheThueXe" />
+            <End Role="PhieuThueXe" EntitySet="PhieuThueXe" />
+          </AssociationSet>
+          <AssociationSet Name="fk_PhieuThueXe_XeDap" Association="Self.fk_PhieuThueXe_XeDap">
+            <End Role="XeDap" EntitySet="XeDap" />
+            <End Role="PhieuThueXe" EntitySet="PhieuThueXe" />
+          </AssociationSet>
+          <AssociationSet Name="fk_TheNganHang_KhachHang" Association="Self.fk_TheNganHang_KhachHang">
+            <End Role="KhachHang" EntitySet="KhachHang" />
+            <End Role="TheNganHang" EntitySet="TheNganHang" />
+          </AssociationSet>
+          <AssociationSet Name="fk_TheNganHang_NganHang" Association="Self.fk_TheNganHang_NganHang">
+            <End Role="NganHang" EntitySet="NganHang" />
+            <End Role="TheNganHang" EntitySet="TheNganHang" />
+          </AssociationSet>
+          <AssociationSet Name="fk_TheThueXe_Admin" Association="Self.fk_TheThueXe_Admin">
+            <End Role="Admin" EntitySet="Admin" />
+            <End Role="TheThueXe" EntitySet="TheThueXe" />
+          </AssociationSet>
+          <AssociationSet Name="fk_TheThueXe_KhachHang" Association="Self.fk_TheThueXe_KhachHang">
+            <End Role="KhachHang" EntitySet="KhachHang" />
+            <End Role="TheThueXe" EntitySet="TheThueXe" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="OOADModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HoTen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SoDienThoai" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TheThueXes" Relationship="Self.fk_TheThueXe_Admin" FromRole="Admin" ToRole="TheThueXe" />
+        </EntityType>
+        <EntityType Name="KhachHang">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HoTen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DiaChi" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="SoDienThoai" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TheNganHangs" Relationship="Self.fk_TheNganHang_KhachHang" FromRole="KhachHang" ToRole="TheNganHang" />
+          <NavigationProperty Name="TheThueXes" Relationship="Self.fk_TheThueXe_KhachHang" FromRole="KhachHang" ToRole="TheThueXe" />
+        </EntityType>
+        <EntityType Name="NganHang">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenNganHang" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TheNganHangs" Relationship="Self.fk_TheNganHang_NganHang" FromRole="NganHang" ToRole="TheNganHang" />
+        </EntityType>
+        <EntityType Name="PhieuThueXe">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ThoiGianMuon" Type="DateTime" Precision="3" />
+          <Property Name="ThoiGianTra" Type="DateTime" Precision="3" />
+          <Property Name="MaTheThueXe" Type="Int32" />
+          <Property Name="MaXe" Type="Int32" />
+          <NavigationProperty Name="TheThueXe" Relationship="Self.fk_PhieuThueXe_TheThueXe" FromRole="PhieuThueXe" ToRole="TheThueXe" />
+          <NavigationProperty Name="XeDap" Relationship="Self.fk_PhieuThueXe_XeDap" FromRole="PhieuThueXe" ToRole="XeDap" />
+        </EntityType>
+        <EntityType Name="TheNganHang">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaKhachHang" Type="Int32" />
+          <Property Name="MaNganHang" Type="Int32" />
+          <NavigationProperty Name="KhachHang" Relationship="Self.fk_TheNganHang_KhachHang" FromRole="TheNganHang" ToRole="KhachHang" />
+          <NavigationProperty Name="NganHang" Relationship="Self.fk_TheNganHang_NganHang" FromRole="TheNganHang" ToRole="NganHang" />
+        </EntityType>
+        <EntityType Name="TheThueXe">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NgayLamThe" Type="DateTime" Precision="3" />
+          <Property Name="LoaiThe" Type="Int32" />
+          <Property Name="MaKhachHang" Type="Int32" />
+          <Property Name="MaQuanLy" Type="Int32" />
+          <NavigationProperty Name="Admin" Relationship="Self.fk_TheThueXe_Admin" FromRole="TheThueXe" ToRole="Admin" />
+          <NavigationProperty Name="KhachHang" Relationship="Self.fk_TheThueXe_KhachHang" FromRole="TheThueXe" ToRole="KhachHang" />
+          <NavigationProperty Name="PhieuThueXes" Relationship="Self.fk_PhieuThueXe_TheThueXe" FromRole="TheThueXe" ToRole="PhieuThueXe" />
+        </EntityType>
+        <EntityType Name="XeDap">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenXE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TinhTrangXe" Type="Int32" />
+          <Property Name="GiaThue" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Hinh" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PhieuThueXes" Relationship="Self.fk_PhieuThueXe_XeDap" FromRole="XeDap" ToRole="PhieuThueXe" />
+        </EntityType>
+        <Association Name="fk_TheThueXe_Admin">
+          <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
+          <End Role="TheThueXe" Type="Self.TheThueXe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admin">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TheThueXe">
+              <PropertyRef Name="MaQuanLy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_TheNganHang_KhachHang">
+          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="0..1" />
+          <End Role="TheNganHang" Type="Self.TheNganHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhachHang">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TheNganHang">
+              <PropertyRef Name="MaKhachHang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_TheThueXe_KhachHang">
+          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="0..1" />
+          <End Role="TheThueXe" Type="Self.TheThueXe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhachHang">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TheThueXe">
+              <PropertyRef Name="MaKhachHang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_TheNganHang_NganHang">
+          <End Role="NganHang" Type="Self.NganHang" Multiplicity="0..1" />
+          <End Role="TheNganHang" Type="Self.TheNganHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NganHang">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TheNganHang">
+              <PropertyRef Name="MaNganHang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_PhieuThueXe_TheThueXe">
+          <End Role="TheThueXe" Type="Self.TheThueXe" Multiplicity="0..1" />
+          <End Role="PhieuThueXe" Type="Self.PhieuThueXe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TheThueXe">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PhieuThueXe">
+              <PropertyRef Name="MaTheThueXe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_PhieuThueXe_XeDap">
+          <End Role="XeDap" Type="Self.XeDap" Multiplicity="0..1" />
+          <End Role="PhieuThueXe" Type="Self.PhieuThueXe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="XeDap">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PhieuThueXe">
+              <PropertyRef Name="MaXe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OOADEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admins" EntityType="Self.Admin" />
+          <EntitySet Name="KhachHangs" EntityType="Self.KhachHang" />
+          <EntitySet Name="NganHangs" EntityType="Self.NganHang" />
+          <EntitySet Name="PhieuThueXes" EntityType="Self.PhieuThueXe" />
+          <EntitySet Name="TheNganHangs" EntityType="Self.TheNganHang" />
+          <EntitySet Name="TheThueXes" EntityType="Self.TheThueXe" />
+          <EntitySet Name="XeDaps" EntityType="Self.XeDap" />
+          <AssociationSet Name="fk_TheThueXe_Admin" Association="Self.fk_TheThueXe_Admin">
+            <End Role="Admin" EntitySet="Admins" />
+            <End Role="TheThueXe" EntitySet="TheThueXes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_TheNganHang_KhachHang" Association="Self.fk_TheNganHang_KhachHang">
+            <End Role="KhachHang" EntitySet="KhachHangs" />
+            <End Role="TheNganHang" EntitySet="TheNganHangs" />
+          </AssociationSet>
+          <AssociationSet Name="fk_TheThueXe_KhachHang" Association="Self.fk_TheThueXe_KhachHang">
+            <End Role="KhachHang" EntitySet="KhachHangs" />
+            <End Role="TheThueXe" EntitySet="TheThueXes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_TheNganHang_NganHang" Association="Self.fk_TheNganHang_NganHang">
+            <End Role="NganHang" EntitySet="NganHangs" />
+            <End Role="TheNganHang" EntitySet="TheNganHangs" />
+          </AssociationSet>
+          <AssociationSet Name="fk_PhieuThueXe_TheThueXe" Association="Self.fk_PhieuThueXe_TheThueXe">
+            <End Role="TheThueXe" EntitySet="TheThueXes" />
+            <End Role="PhieuThueXe" EntitySet="PhieuThueXes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_PhieuThueXe_XeDap" Association="Self.fk_PhieuThueXe_XeDap">
+            <End Role="XeDap" EntitySet="XeDaps" />
+            <End Role="PhieuThueXe" EntitySet="PhieuThueXes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="OOADModelStoreContainer" CdmEntityContainer="OOADEntities">
+          <EntitySetMapping Name="Admins">
+            <EntityTypeMapping TypeName="OOADModel.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+                <ScalarProperty Name="SoDienThoai" ColumnName="SoDienThoai" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KhachHangs">
+            <EntityTypeMapping TypeName="OOADModel.KhachHang">
+              <MappingFragment StoreEntitySet="KhachHang">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="SoDienThoai" ColumnName="SoDienThoai" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NganHangs">
+            <EntityTypeMapping TypeName="OOADModel.NganHang">
+              <MappingFragment StoreEntitySet="NganHang">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TenNganHang" ColumnName="TenNganHang" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PhieuThueXes">
+            <EntityTypeMapping TypeName="OOADModel.PhieuThueXe">
+              <MappingFragment StoreEntitySet="PhieuThueXe">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ThoiGianMuon" ColumnName="ThoiGianMuon" />
+                <ScalarProperty Name="ThoiGianTra" ColumnName="ThoiGianTra" />
+                <ScalarProperty Name="MaTheThueXe" ColumnName="MaTheThueXe" />
+                <ScalarProperty Name="MaXe" ColumnName="MaXe" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TheNganHangs">
+            <EntityTypeMapping TypeName="OOADModel.TheNganHang">
+              <MappingFragment StoreEntitySet="TheNganHang">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MaKhachHang" ColumnName="MaKhachHang" />
+                <ScalarProperty Name="MaNganHang" ColumnName="MaNganHang" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TheThueXes">
+            <EntityTypeMapping TypeName="OOADModel.TheThueXe">
+              <MappingFragment StoreEntitySet="TheThueXe">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="NgayLamThe" ColumnName="NgayLamThe" />
+                <ScalarProperty Name="LoaiThe" ColumnName="LoaiThe" />
+                <ScalarProperty Name="MaKhachHang" ColumnName="MaKhachHang" />
+                <ScalarProperty Name="MaQuanLy" ColumnName="MaQuanLy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="XeDaps">
+            <EntityTypeMapping TypeName="OOADModel.XeDap">
+              <MappingFragment StoreEntitySet="XeDap">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TenXE" ColumnName="TenXE" />
+                <ScalarProperty Name="TinhTrangXe" ColumnName="TinhTrangXe" />
+                <ScalarProperty Name="GiaThue" ColumnName="GiaThue" />
+                <ScalarProperty Name="Hinh" ColumnName="Hinh" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
