@@ -1,0 +1,10 @@
+H:\OOAD\Nhom8\Nhom8\bin\Debug\Nhom8.exe.config
+H:\OOAD\Nhom8\Nhom8\bin\Debug\Nhom8.exe
+H:\OOAD\Nhom8\Nhom8\bin\Debug\Nhom8.pdb
+H:\OOAD\Nhom8\Nhom8\obj\Debug\Nhom8.csprojAssemblyReference.cache
+H:\OOAD\Nhom8\Nhom8\obj\Debug\Nhom8.frmThueXe.resources
+H:\OOAD\Nhom8\Nhom8\obj\Debug\Nhom8.Properties.Resources.resources
+H:\OOAD\Nhom8\Nhom8\obj\Debug\Nhom8.csproj.GenerateResource.cache
+H:\OOAD\Nhom8\Nhom8\obj\Debug\Nhom8.csproj.CoreCompileInputs.cache
+H:\OOAD\Nhom8\Nhom8\obj\Debug\Nhom8.exe
+H:\OOAD\Nhom8\Nhom8\obj\Debug\Nhom8.pdb
