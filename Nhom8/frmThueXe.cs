@@ -35,7 +35,7 @@ namespace Nhom8
             try
             {
                 conn.Open();
-                string query = "select x.Id, x.TenXE, x.TinhTrangXe, x.GiaThue, p.ThoiGianMuon, p.ThoiGianTra from XeDap x, PhieuThueXe p where x.Id = p.Id";
+                string query = "select * from XeDap";
                 SqlCommand cmd = new SqlCommand(query, conn);
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 if (dt == null)

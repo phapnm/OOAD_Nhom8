@@ -32,16 +32,15 @@
             this.dtgvXe = new System.Windows.Forms.DataGridView();
             this.btnThueXe = new System.Windows.Forms.Button();
             this.btnTraXe = new System.Windows.Forms.Button();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TenXE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TinhTrangXe = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.GiaThue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ThoiGianMuon = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ThoiGianTra = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.cbTheThueXe = new System.Windows.Forms.ComboBox();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TenXE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TinhTrangXe = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.GiaThue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Hinh = new System.Windows.Forms.DataGridViewImageColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dtgvXe)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -54,12 +53,11 @@
             this.TenXE,
             this.TinhTrangXe,
             this.GiaThue,
-            this.ThoiGianMuon,
-            this.ThoiGianTra});
+            this.Hinh});
             this.dtgvXe.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dtgvXe.Location = new System.Drawing.Point(0, 117);
             this.dtgvXe.Name = "dtgvXe";
-            this.dtgvXe.Size = new System.Drawing.Size(772, 225);
+            this.dtgvXe.Size = new System.Drawing.Size(611, 225);
             this.dtgvXe.TabIndex = 2;
             this.dtgvXe.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dtgvXe_RowHeaderMouseClick);
             // 
@@ -83,48 +81,6 @@
             this.btnTraXe.UseVisualStyleBackColor = true;
             this.btnTraXe.Click += new System.EventHandler(this.btnTraXe_Click);
             // 
-            // Id
-            // 
-            this.Id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Id.DataPropertyName = "Id";
-            this.Id.HeaderText = "Mã Xe";
-            this.Id.Name = "Id";
-            // 
-            // TenXE
-            // 
-            this.TenXE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.TenXE.DataPropertyName = "TenXE";
-            this.TenXE.HeaderText = "Tên Xe";
-            this.TenXE.Name = "TenXE";
-            // 
-            // TinhTrangXe
-            // 
-            this.TinhTrangXe.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.TinhTrangXe.DataPropertyName = "TinhTrangXe";
-            this.TinhTrangXe.HeaderText = "Trạng Thái";
-            this.TinhTrangXe.Name = "TinhTrangXe";
-            // 
-            // GiaThue
-            // 
-            this.GiaThue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.GiaThue.DataPropertyName = "GiaThue";
-            this.GiaThue.HeaderText = "Giá Thuê";
-            this.GiaThue.Name = "GiaThue";
-            // 
-            // ThoiGianMuon
-            // 
-            this.ThoiGianMuon.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ThoiGianMuon.DataPropertyName = "ThoiGianMuon";
-            this.ThoiGianMuon.HeaderText = "Thời Gian Mượn";
-            this.ThoiGianMuon.Name = "ThoiGianMuon";
-            // 
-            // ThoiGianTra
-            // 
-            this.ThoiGianTra.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ThoiGianTra.DataPropertyName = "ThoiGianTra";
-            this.ThoiGianTra.HeaderText = "Thời Gian Trả";
-            this.ThoiGianTra.Name = "ThoiGianTra";
-            // 
             // timer1
             // 
             this.timer1.Enabled = true;
@@ -137,7 +93,7 @@
             this.toolStripStatusLabel1});
             this.statusStrip1.Location = new System.Drawing.Point(0, 95);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(772, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(611, 22);
             this.statusStrip1.TabIndex = 5;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -156,11 +112,49 @@
             this.cbTheThueXe.TabIndex = 6;
             this.cbTheThueXe.Text = "Mã thẻ thuê xe";
             // 
+            // Id
+            // 
+            this.Id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Id.DataPropertyName = "Id";
+            this.Id.HeaderText = "Mã Xe";
+            this.Id.Name = "Id";
+            // 
+            // TenXE
+            // 
+            this.TenXE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.TenXE.DataPropertyName = "TenXE";
+            this.TenXE.FillWeight = 61.74594F;
+            this.TenXE.HeaderText = "Tên Xe";
+            this.TenXE.Name = "TenXE";
+            // 
+            // TinhTrangXe
+            // 
+            this.TinhTrangXe.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.TinhTrangXe.DataPropertyName = "TinhTrangXe";
+            this.TinhTrangXe.FillWeight = 61.74594F;
+            this.TinhTrangXe.HeaderText = "Trạng Thái";
+            this.TinhTrangXe.Name = "TinhTrangXe";
+            // 
+            // GiaThue
+            // 
+            this.GiaThue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.GiaThue.DataPropertyName = "GiaThue";
+            this.GiaThue.FillWeight = 61.74594F;
+            this.GiaThue.HeaderText = "Giá Thuê";
+            this.GiaThue.Name = "GiaThue";
+            // 
+            // Hinh
+            // 
+            this.Hinh.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Hinh.DataPropertyName = "Hinh";
+            this.Hinh.HeaderText = "Hình Ảnh";
+            this.Hinh.Name = "Hinh";
+            // 
             // frmThueXe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(772, 342);
+            this.ClientSize = new System.Drawing.Size(611, 342);
             this.Controls.Add(this.cbTheThueXe);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.btnTraXe);
@@ -181,16 +175,15 @@
         private System.Windows.Forms.DataGridView dtgvXe;
         private System.Windows.Forms.Button btnThueXe;
         private System.Windows.Forms.Button btnTraXe;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TenXE;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TinhTrangXe;
-        private System.Windows.Forms.DataGridViewTextBoxColumn GiaThue;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ThoiGianMuon;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ThoiGianTra;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ComboBox cbTheThueXe;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TenXE;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TinhTrangXe;
+        private System.Windows.Forms.DataGridViewTextBoxColumn GiaThue;
+        private System.Windows.Forms.DataGridViewImageColumn Hinh;
     }
 }
 
